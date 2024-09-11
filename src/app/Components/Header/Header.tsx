@@ -11,7 +11,7 @@ const Header = () => {
             <Image src={Logo} alt="Logo" className="w-28 h-28" />
           </div>
           <div>
-            <Menu/>
+            <Menu textcolor={'text-black'}/>
           </div>
         </div>
       </div>
