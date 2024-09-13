@@ -1,3 +1,4 @@
+"use client";
 import Image from "next/image";
 import React from "react";
 import logo from "../../../../Public/logo.png";
@@ -5,9 +6,12 @@ import Menu from "../Header/Menu";
 import { CiFacebook } from "react-icons/ci";
 import { FaWhatsapp } from "react-icons/fa";
 import { LuStore } from "react-icons/lu";
+import { usePathname } from "next/navigation";
 const Footer = () => {
+  const pathname = usePathname();
+  const isHidden = pathname === "/register" || pathname === "/login";
   return (
-    <div className="bg-black py-8 mt-28">
+    <div className={`bg-black py-8 mt-28 ${isHidden ? "hidden" : "block"}`}>
       <div className="max-w-6xl mx-auto flex lg:flex-row flex-col items-center justify-around">
         <div className="">
           <div className="relative w-60 h-60">
