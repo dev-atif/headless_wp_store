@@ -1,3 +1,10 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+.slick-dots{
+  @apply  !relative !flex  flex-wrap justify-center
+}
+.slick-dots li {
+   @apply lg:w-28 lg:h-28 w-16 h-16 !important; 
+}
