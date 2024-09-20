@@ -8,3 +8,15 @@
 .slick-dots li {
    @apply lg:w-28 lg:h-28 w-16 h-16 !important; 
 }
+.progress{
+  @apply !border-b-0;
+}
+.stepperDiv .step{
+  @apply !w-10 !h-10
+}
+.stepperDiv .step.completed {
+@apply !bg-green-500
+}
+.percent {
+  @apply !border-green-500
+}

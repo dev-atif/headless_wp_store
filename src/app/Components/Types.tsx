@@ -111,3 +111,11 @@ interface Product {
 interface ProductProps {
   products: Product;
 }
+type StyleConfig = {
+  activeBgColor: string;
+  completedBgColor: string;
+  inactiveBgColor: string;
+  activeTextColor: string;
+  completedTextColor: string;
+  inactiveTextColor: string;
+};
