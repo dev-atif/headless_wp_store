@@ -10,20 +10,14 @@ const useFetchproducts = () => {
   useEffect(() => {
     const fetchProducts = async () => {
       //encode auth
-      const auth = Buffer.from(
-        `${process.env.NEXT_PUBLIC_ADMIN}:${process.env.NEXT_PUBLIC_PASS_KEY}`
-      ).toString("base64");
-
+      
       try {
         const response = await axios.get(
-          "http://localhost/wordpress/wp-json/wc/v3/products",
-          {
-            headers: {
-              Authorization: `Basic ${auth}`,
-            },
-          }
+          `${process.env.NEXT_PUBLIC_STRAPI_URL}/api/products?populate=*`,
+          {}
         );
-        setProducts(response.data);
+        console.warn(response.data)
+        setProducts(response.data.data);
         setLoading(false);
       } catch (error: any) {
         setError(error);

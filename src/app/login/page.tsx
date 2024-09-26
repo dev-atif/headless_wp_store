@@ -24,9 +24,9 @@ const page = () => {
     e.preventDefault();
     try {
       const response = await axios.post(
-        "http://localhost/wordpress/?rest_route=/simple-jwt-login/v1/auth",
+        `${process.env.NEXT_PUBLIC_STRAPI_URL}/api/auth/local`,
         {
-          email: formData.email,
+          identifier: formData.email,
           password: formData.Password,
         },
         {
@@ -36,12 +36,14 @@ const page = () => {
         }
       );
       toast.success("Login Successfully");
-      console.warn(response.data.data.jwt);
-      dispatch(setToken(response.data.data.jwt));
+      console.warn(response.data.jwt);
+      dispatch(setToken(response.data.jwt));
       return response.data;
     } catch (error: any) {
-      const errorMessage =
-        error.response?.data.data.message || "An error occurred";
+      const errorResponse = error.response.data;
+
+      // Check if errorResponse exists and extract the message
+      const errorMessage = errorResponse?.error?.message || error.message;
 
       toast.error(errorMessage);
     }

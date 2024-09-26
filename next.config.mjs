@@ -1,7 +1,11 @@
-/** @type {import('next').NextConfig} */
+// @ts-check
+
+/**
+ * @type {import('next').NextConfig}
+ */
 const nextConfig = {
   images: {
-    domains: ["localhost"], // Add any other domains you need
+    domains: ['localhost'], // Allow images from localhost
   },
 };
 
