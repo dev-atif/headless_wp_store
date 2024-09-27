@@ -79,10 +79,17 @@ const cartSlice = createSlice({
       }
     },
 
-    removeItem: (state, action: PayloadAction<number>) => {
-      // Changed to number
-      state.items = state.items.filter((item) => item.id !== action.payload);
-    },
+   removeItem: (state, action: PayloadAction<Product>) => {
+  const { id, selectedSize, selectedColor } = action.payload;
+
+  // Filter out the item from the cart based on id, size, and color
+  state.items = state.items.filter(
+    (item) =>
+      item.id !== id ||
+      item.selectedSize !== selectedSize ||
+      item.selectedColor !== selectedColor
+  );
+},
     clearCart: (state) => {
       state.items = [];
     },

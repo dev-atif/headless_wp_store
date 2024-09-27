@@ -1,7 +1,7 @@
 import React from "react";
 import InputFileds from "../InputFileds";
 
-const PersonelInformation = () => {
+const PersonelInformation = ({formik}:{formik:any}) => {
   return (
     <div>
       <div>
@@ -13,37 +13,93 @@ const PersonelInformation = () => {
           </div>
           <div className="flex gap-8 mt-4">
             <div className="w-1/2">
-              <InputFileds label={"First Name"} />
+              <InputFileds
+            
+                onChange={formik.handleChange}
+                onBlur={formik.handleBlur}
+                value={formik.values.FirstName}
+                name="FirstName"
+                label={"First Name"}
+              />
             </div>
             <div className="w-1/2">
-              <InputFileds label="Last Name" />
+              <InputFileds
+                onChange={formik.handleChange}
+                onBlur={formik.handleBlur}
+                value={formik.values.LastName}
+                name="LastName"
+                label="Last Name"
+              />
             </div>
           </div>
           <div>
-            <InputFileds label="Address" />
+            <InputFileds
+              onChange={formik.handleChange}
+              onBlur={formik.handleBlur}
+              value={formik.values.Address}
+              name="Address"
+              label="Address"
+            />
           </div>
           <div className="flex gap-8 mt-4">
             <div className="w-1/2">
-              <InputFileds label={"City"} />
+              <InputFileds
+                onChange={formik.handleChange}
+                onBlur={formik.handleBlur}
+                value={formik.values.City}
+                name="City"
+                label={"City"}
+              />
             </div>
             <div className="w-1/2">
-              <InputFileds label="State" />
+              <InputFileds
+                onChange={formik.handleChange}
+                onBlur={formik.handleBlur}
+                value={formik.values.State}
+                name="State"
+                label="State"
+              />
             </div>
           </div>
           <div className="flex gap-8 mt-4">
             <div className="w-1/2">
-              <InputFileds label={"Post Code"} />
+              <InputFileds
+                onChange={formik.handleChange}
+                onBlur={formik.handleBlur}
+                value={formik.values.PostCode}
+                name="PostCode"
+                label={"Post Code"}
+              />
             </div>
             <div className="w-1/2">
-              <InputFileds label="Country" />
+              <InputFileds
+                onChange={formik.handleChange}
+                onBlur={formik.handleBlur}
+                value={formik.values.Country}
+                name="Country"
+                label="Country"
+              />
             </div>
           </div>
           <div className="flex gap-8 mt-4">
             <div className="w-1/2">
-              <InputFileds label={"Email Address"} />
+              <InputFileds
+              type="email"
+                onChange={formik.handleChange}
+                onBlur={formik.handleBlur}
+                value={formik.values.Email}
+                name="Email"
+                label={"Email Address"}
+              />
             </div>
             <div className="w-1/2">
-              <InputFileds label="Number" />
+              <InputFileds
+                onChange={formik.handleChange}
+                onBlur={formik.handleBlur}
+                value={formik.values.Number}
+                name="Number"
+                label="Number"
+              />
             </div>
           </div>
         </div>

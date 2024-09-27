@@ -20,3 +20,6 @@
 .percent {
   @apply !border-green-500
 }
+.stepperDiv .progressBarDiv {
+  @apply xl:w-1/2 lg:w-[70%] px-5 lg:px-0 mx-auto
+}

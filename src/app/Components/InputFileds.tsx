@@ -1,15 +1,31 @@
 import React from "react";
 interface Iprop {
   label: string;
-  type?:string
+  type?: string;
+  name: string;
+  onChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
+  onBlur: (e: React.FocusEvent<HTMLInputElement>) => void;
+  value: string; // Ensure to get the value prop
+  error?: string; // Optional error message
 }
-const InputFileds: React.FC<Iprop> = ({ label ,type}) => {
+
+const InputFileds: React.FC<Iprop> = ({
+  label,
+  type,
+  name,
+  onChange,
+  onBlur
+,value}) => {
   return (
     <div>
       <div>
         <div className="relative z-0 w-full mb-5 group">
           <input
             type={type}
+            name={name}
+            onChange={onChange}
+            onBlur={onBlur} // Handle blur event for validation
+           value={value}
             className="block py-2.5  px-0 w-full text-sm text-black bg-transparent border-0 border-b-2 border-gray-300 appearance-none  dark:border-gray-600  focus:outline-none focus:ring-0 focus:border-blue-600 peer"
             placeholder=" "
             required

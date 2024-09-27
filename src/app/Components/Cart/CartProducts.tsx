@@ -1,10 +1,11 @@
 "use client";
 import useCarttotal from "@/app/Hooks/useCarttotal";
 import { useAppDispatch, useAppSelector } from "@/app/Hooks/useRedux";
-import { addItem, decreaseItem, increaseItem } from "@/app/redux/slices/cart-slice";
+import { addItem, decreaseItem, increaseItem, removeItem } from "@/app/redux/slices/cart-slice";
 import Image from "next/image";
 import React from "react";
 import empty from '../../../../Public/emptycart.jpg'
+import { MdDelete } from "react-icons/md";
 import Link from "next/link";
 const CartProducts = () => {
   const { items } = useAppSelector((state) => state.cart);
@@ -29,6 +30,7 @@ const CartProducts = () => {
                     <th className="py-4 px-6 text-left">Price</th>
                     <th className="py-4 px-6 text-left">Quantity</th>
                     <th className="py-4 px-6 text-left">Total</th>
+                    <th className="py-4 px-6 text-left">Delete</th>
                   </tr>
                 </thead>
                 <tbody>
@@ -104,13 +106,22 @@ const CartProducts = () => {
                           ) * product.quantity}
                         </span>
                       </td>
+                      <td className="py-4  px-6">
+                        <div className="flex items-center justify-center">
+                          <div onClick={()=>dispatch(removeItem(product))} className=" cursor-pointer hover:scale-110 transition-all duration-300 transform bg-black text-white w-fit p-1 rounded-full text-3xl ">
+                            <span >
+                              <MdDelete />
+                            </span>
+                          </div>
+                        </div>
+                      </td>
                     </tr>
                   ))}
                 </tbody>
               </table>
             </div>
 
-            <div className="mt-8 flex justify-between items-center max-w-7xl mx-auto">
+            <div className="mt-8 flex lg:flex-row flex-col gap-8 lg:gap-0 justify-between items-center max-w-7xl mx-auto">
               <a
                 href="/products"
                 className="text-blue-600 hover:text-blue-800 font-semibold"
@@ -124,7 +135,7 @@ const CartProducts = () => {
               </div>
               <div>
                 <button className="ml-4 uppercase bg-black text-white px-6 py-2 rounded-lg hover:scale-105 transition-all transform duration-300">
-                  <Link href={'/checkout'}>Check out</Link>
+                  <Link href={"/checkout"}>Check out</Link>
                 </button>
               </div>
             </div>

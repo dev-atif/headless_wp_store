@@ -5,9 +5,9 @@ import coins from "../../../../Public/coins.png";
 import card from "../../../../Public/cards.png";
 import gifcod from "../../../../Public/check.gif";
 import InputFileds from "../InputFileds";
-const PayMent = () => {
-  const [payment, setPayment] = useState<string | null>(null);
-  console.warn(payment);
+const PayMent = ({ formik }: { formik: any }) => {
+  const [payment, setPayment] = useState<string | null>("CardPayment");
+
   return (
     <div className="w-full">
       <div className="my-14">
@@ -30,7 +30,9 @@ const PayMent = () => {
             {/* Cash On deilvery---------------------- */}
 
             <div
-              onClick={() => setPayment("COD")}
+              onClick={() => {
+                setPayment("COD"), formik.setFieldValue("PaymentMethod", "COD");
+              }}
               className={` cursor-pointer relative lg:w-1/2 h-44 py-2 px-4 rounded-lg  border flex items-start  flex-col ${
                 payment === "COD" ? "border-green-500" : "border-black"
               }`}
@@ -53,7 +55,8 @@ const PayMent = () => {
             </div>
             {/* PayMent Using Card ---------------------------------------- */}
             <div
-              onClick={() => setPayment("CardPayment")}
+              onClick={() => {setPayment("CardPayment"),
+                formik.setFieldValue("PaymentMethod", "CardPayment");}}
               className={` cursor-pointer mt-4 lg:mt-0 relative lg:w-1/2 h-44 py-2 px-4 rounded-lg  border flex items-start  flex-col ${
                 payment === "CardPayment" ? "border-green-500" : "border-black"
               }`}
@@ -85,25 +88,53 @@ const PayMent = () => {
           >
             <div>
               <h1 className="text-xl text-gray-500 lg:flex   items-center gap-3 mb-10">
-                Please Enter Your Card Details <span className="text-sm">
-                    (Wrong Details Cause the Order Cancellation)
+                Please Enter Your Card Details{" "}
+                <span className="text-sm">
+                  (Wrong Details Cause the Order Cancellation)
                 </span>
               </h1>
             </div>
             <div className="lg:flex gap-6">
               <div className="lg:w-1/2">
-                <InputFileds type="text" label="Card Holder Name" />
+                <InputFileds
+                  onChange={formik.handleChange}
+                  onBlur={formik.handleBlur}
+                  value={formik.values.CardHolderName}
+                  name="CardHolderName"
+                  type="text"
+                  label="Card Holder Name"
+                />
               </div>
               <div className="lg:w-1/2">
-                <InputFileds type="text" label="Card Number" />
+                <InputFileds
+                  onChange={formik.handleChange}
+                  onBlur={formik.handleBlur}
+                  value={formik.values.CardNumber}
+                  name="CardNumber"
+                  type="text"
+                  label="Card Number"
+                />
               </div>
             </div>
             <div className="lg:flex gap-6 my-10">
               <div className="lg:w-1/2">
-                <InputFileds type="date" label="Expiration Date" />
+                <InputFileds
+                  onChange={formik.handleChange}
+                  onBlur={formik.handleBlur}
+                  value={formik.values.ExpirationDate}
+                  name="ExpirationDate"
+                  type="date"
+                  label="Expiration Date"
+                />
               </div>
               <div className="lg:w-1/2">
-                <InputFileds label="CVV/CVC" />
+                <InputFileds
+                  onChange={formik.handleChange}
+                  onBlur={formik.handleBlur}
+                  value={formik.values.CVC}
+                  name="CVC"
+                  label="CVV/CVC"
+                />
               </div>
             </div>
           </div>
