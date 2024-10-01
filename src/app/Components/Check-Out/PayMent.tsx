@@ -6,7 +6,7 @@ import card from "../../../../Public/cards.png";
 import gifcod from "../../../../Public/check.gif";
 import InputFileds from "../InputFileds";
 const PayMent = ({ formik }: { formik: any }) => {
-  const [payment, setPayment] = useState<string | null>("CardPayment");
+  const [payment, setPayment] = useState<string | null>("");
 
   return (
     <div className="w-full">
@@ -55,8 +55,10 @@ const PayMent = ({ formik }: { formik: any }) => {
             </div>
             {/* PayMent Using Card ---------------------------------------- */}
             <div
-              onClick={() => {setPayment("CardPayment"),
-                formik.setFieldValue("PaymentMethod", "CardPayment");}}
+              onClick={() => {
+                setPayment("CardPayment"),
+                  formik.setFieldValue("PaymentMethod", "CardPayment");
+              }}
               className={` cursor-pointer mt-4 lg:mt-0 relative lg:w-1/2 h-44 py-2 px-4 rounded-lg  border flex items-start  flex-col ${
                 payment === "CardPayment" ? "border-green-500" : "border-black"
               }`}

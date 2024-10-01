@@ -11,6 +11,7 @@ import toast from "react-hot-toast";
 import axios from "axios";
 import { useAppSelector } from "../Hooks/useRedux";
 import useCarttotal from "../Hooks/useCarttotal";
+import { format } from "date-fns";
 
 const page = () => {
   const { items } = useAppSelector((s) => s.cart);
@@ -25,7 +26,7 @@ const page = () => {
     Country: "",
     Email: "",
     Number: "",
-    PaymentMethod: "CardPayment",
+    PaymentMethod: "",
     CardHolderName: "",
     CardNumber: "",
     ExpirationDate: "",
@@ -91,6 +92,7 @@ const page = () => {
   // };
 
   const handleFinalSubmit = async (values: any) => {
+    console.warn("paymentytpe", values.PaymentMethod);
     // const errors = validateFields(values);
 
     //   if (Object.keys(errors).length > 0) {
@@ -104,10 +106,23 @@ const page = () => {
       data: {
         Customer_Name: `${values.FirstName} ${values.LastName}`,
         Email: values.Email,
+        Address: `${values.Address} ${values.City} ${values.State} ${values.PostCode} ${values.Country}`,
         phone: values.Number,
-        Products: items,
+        Products: items.map((product: any) => ({
+          product_id: product.id,
+          product_name: product.title,
+          quantity: product.quantity,
+          price: product.price,
+          Selected_Size: product.selectedSize || "N/A",
+          Selected_Color: product.selectedColor || "N/A",
+        })),
         Total_Amount: Subtotal,
         Payment_Method: values.PaymentMethod,
+        Card_Holder_Name: values.CardHolderName,
+        Card_Number: values.CardNumber,
+        Expiration_Date:
+          values.PaymentMethod === "COD" ? null : values.ExpirationDate,
+        CVC: values.CVC,
       },
     };
     try {
