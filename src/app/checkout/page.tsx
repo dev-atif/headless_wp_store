@@ -131,7 +131,8 @@ const page = () => {
         payload
       );
       if (response) {
-        toast.success("Your Order Has been Placed");
+        toast.success("Your Order Has been Placed ");
+        toast.success("Please Check Your Email to Confrim");
       }
     } catch (error) {
       console.warn("error", error);

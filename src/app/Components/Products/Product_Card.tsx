@@ -50,6 +50,54 @@ const Product_Card: React.FC<ProductCardProps> = ({ products }) => {
                       width={400}
                       height={400}
                     />
+                    {(products.Size?.length || products.Color?.length) && (
+                      <div className="group bg-black/30 !flex  px-5 justify-center flex-col backdrop-blur-md border border-white/20 h-full w-full absolute transition-opacity duration-300 ease-in-out opacity-0 group-hover:opacity-100 group-hover:block rounded-lg">
+                        <div className="flex items-center gap-3 mt-4">
+                          {products?.Size && (
+                            <>
+                              {products.Size.map(
+                                (itm: string, index: number) => (
+                                  <button
+                                    key={index}
+                                    onClick={() => setSelectedSize(itm)} // Update selected Size
+                                    className={`px-4 py-2  border-2 rounded-md text-sm hover:bg-black text-white font-bold hover:text-white transition-all duration-300 ${
+                                      selectedSize === itm
+                                        ? "bg-black text-white"
+                                        : ""
+                                    }`} // Highlight selected Size
+                                    type="button"
+                                  >
+                                    {itm}
+                                  </button>
+                                )
+                              )}
+                            </>
+                          )}
+                        </div>
+                        <div className="flex items-center flex-wrap gap-3 mt-4">
+                          {products?.Color && (
+                            <>
+                              {products.Color.map(
+                                (color: string, index: number) => (
+                                  <button
+                                    key={index}
+                                    onClick={() => setSelectedColor(color)} // Update selected color
+                                    className={`px-4 py-2 border-2 text-white font-semibold rounded-md text-sm hover:bg-black hover:text-white transition-all duration-300 ${
+                                      selectedColor === color
+                                        ? "bg-black text-white"
+                                        : ""
+                                    }`} // Highlight selected color
+                                    type="button"
+                                  >
+                                    {color}
+                                  </button>
+                                )
+                              )}
+                            </>
+                          )}
+                        </div>
+                      </div>
+                    )}
                   </div>
                 ) : (
                   <div className="flex items-center justify-center h-full text-gray-500">
@@ -71,12 +119,17 @@ const Product_Card: React.FC<ProductCardProps> = ({ products }) => {
                   </h5>
                 </a>
                 <div>
-                  <p className="flex items-center gap-3">
-                    Category :{" "}
-                    <span className="text-gray-500 font-medium">
-                      {products.productCategory}
-                    </span>
-                  </p>
+                  {products.categories && (
+                    <p className="flex items-center gap-3">
+                      Category :{" "}
+                      {products.categories.map((itm, idx) => (
+                        <span className="text-gray-500 font-medium">
+                          {itm.Category}
+                          {idx < products.categories.length - 1 && "-"}
+                        </span>
+                      ))}
+                    </p>
+                  )}
                 </div>
                 <div className="mt-2 flex items-center justify-between">
                   <p className="text-3xl font-bold text-slate-900">
@@ -96,52 +149,6 @@ const Product_Card: React.FC<ProductCardProps> = ({ products }) => {
               </div>
             </div>
           </Link>
-          {(products.Size?.length || products.Color?.length) && (
-            <div className="group bg-black/30 !flex  px-5 justify-center flex-col backdrop-blur-md border border-white/20 h-[60%] w-full absolute transition-opacity duration-300 ease-in-out opacity-0 group-hover:opacity-100 group-hover:block rounded-lg">
-              <div className="flex items-center gap-3 mt-4">
-                {products?.Size && (
-                  <>
-                    <div className="w-14 font-semibold text-white">
-                      <h1>Size</h1>
-                    </div>
-                    {products.Size.map((itm: string, index: number) => (
-                      <button
-                        key={index}
-                        onClick={() => setSelectedSize(itm)} // Update selected Size
-                        className={`px-4 py-2  border-2 rounded-md text-sm hover:bg-black text-white font-bold hover:text-white transition-all duration-300 ${
-                          selectedSize === itm ? "bg-black text-white" : ""
-                        }`} // Highlight selected Size
-                        type="button"
-                      >
-                        {itm}
-                      </button>
-                    ))}
-                  </>
-                )}
-              </div>
-              <div className="flex items-center gap-3 mt-4">
-                {products?.Color && (
-                  <>
-                    <div className="w-14 font-semibold text-white">
-                      <h1>Color</h1>
-                    </div>
-                    {products.Color.map((color: string, index: number) => (
-                      <button
-                        key={index}
-                        onClick={() => setSelectedColor(color)} // Update selected color
-                        className={`px-4 py-2 border-2 text-white font-semibold rounded-md text-sm hover:bg-black hover:text-white transition-all duration-300 ${
-                          selectedColor === color ? "bg-black text-white" : ""
-                        }`} // Highlight selected color
-                        type="button"
-                      >
-                        {color}
-                      </button>
-                    ))}
-                  </>
-                )}
-              </div>
-            </div>
-          )}
 
           <button
             disabled={products.stock <= 0}

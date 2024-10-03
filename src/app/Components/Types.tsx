@@ -20,9 +20,10 @@ interface Product {
   Color: string[];
   quantity: number;
   selectedColor?: string | null;
-  selectedSize?:string | null
+  selectedSize?: string | null;
+  product_reviews: Review[];
+  categories: ProductCategory[];
 }
-
 
 interface Detail {
   type: string;
@@ -56,7 +57,6 @@ interface Image {
   updatedAt: string; // ISO string representation of the date
   publishedAt: string; // ISO string representation of the date
   locale: string | null; // locale can be a string or null
-  
 }
 
 interface ImageFormats {
@@ -75,4 +75,22 @@ interface ImageFormat {
   size: number; // size in MB
   sizeInBytes: number; // size in bytes
   url: string; // URL of the image format
+}
+interface Review {
+  id: number;
+  documentId: string;
+  Name: string;
+  Email: string;
+  Review: string;
+  createdAt: string;
+  updatedAt: string;
+  publishedAt: string;
+  locale: string | null;
+  rating: number;
+  Review_Status: string;
+}
+interface ProductCategory {
+  // Define properties for category as needed
+  id?: number; // Assuming categories might have an ID
+  Category?: string; // Add other relevant fields based on your data structure
 }

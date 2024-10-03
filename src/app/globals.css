@@ -23,3 +23,9 @@
 .stepperDiv .progressBarDiv {
   @apply xl:w-1/2 lg:w-[70%] px-5 lg:px-0 mx-auto
 }
+/* .style-module_emptyIcons__Bg-FZ {
+  @apply !flex
+}
+.style-module_fillIcons__6---A {
+  @apply !flex
+} */

@@ -31,12 +31,17 @@ const ProductDetails: React.FC<ProductDetailsProps> = ({ product }) => {
           </h1>
         </div>
         <div className="my-4">
-          <h1 className="flex items-center text-lg gap-2 font-medium">
-            Category :{" "}
-            <span className="  font-semibold text-gray-500">
-              {product?.productCategory}
-            </span>
-          </h1>
+          {product?.categories && product.categories.length > 0 && (
+            <h1 className="flex items-center text-lg gap-2 font-medium">
+              Category:{" "}
+              {product.categories.map((itm, idx) => (
+                <span key={idx} className="font-semibold text-gray-500">
+                  {itm.Category} {/* Change this line */}
+                  {idx < product.categories.length - 1 && " - "}
+                </span>
+              ))}
+            </h1>
+          )}
         </div>
         <div className="leading-normal tracking-wide text-base ">
           <p className=" h-36 overflow-clip">{product?.Description}</p>
@@ -62,11 +67,11 @@ const ProductDetails: React.FC<ProductDetailsProps> = ({ product }) => {
           )}
         </div>
         <div className="flex items-center gap-3">
-          <div className="w-14 font-semibold">
-            <h1>Size</h1>
-          </div>
           {product?.Size && (
             <>
+              <div className="w-14 font-semibold">
+                <h1>Size</h1>
+              </div>
               <div className="w-14 font-semibold">
                 <h1>Size</h1>
               </div>
